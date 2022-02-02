@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
 
 const routes = [{
         path: '/login',
         name: 'Login',
-        component: Login
+        component: () =>
+            import ('../views/Login.vue')
     },
     {
         path: '/register',
@@ -13,7 +13,7 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Register.vue')
+            import ('../views/Register.vue')
     }
 ]
 
