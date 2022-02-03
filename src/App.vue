@@ -10,7 +10,7 @@
 </el-sub-menu>
 <el-sub-menu index="2">
     <template #title>NetDisk</template>
-    <el-menu-item index="2-1">Upload</el-menu-item>
+    <el-menu-item index="2-1" @click="upload">Upload</el-menu-item>
     <el-menu-item index="2-2">Download</el-menu-item>
 </el-sub-menu>
 </el-menu>
@@ -40,6 +40,9 @@
             register: function register() {
                 this.$router.push("/register");
             },
+            upload: function upload() {
+                this.$router.push("/upload");
+            }
         },
     };
 </script>

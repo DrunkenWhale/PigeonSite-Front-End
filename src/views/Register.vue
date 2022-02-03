@@ -27,6 +27,7 @@
     </div>
   </el-card>
 </template>
+
 <script>
     import {
         register
