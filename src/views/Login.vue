@@ -27,7 +27,10 @@
 </template>
 
 <script>
-    import login from '../api.js'
+    import login from "../api.js";
+    import {
+        ElMessage
+    } from "element-plus";
     export default {
         name: "Login",
         data() {
@@ -38,10 +41,25 @@
         },
         methods: {
             login: function() {
-                login(this.mailbox_input, this.password_input);
-                this.password_input = ""
-            }
-        }
+                var result = login(this.mailbox_input, this.password_input);
+                result.then((res) => {
+                    window.localStorage.setItem("token", res.data.token);
+                    ElMessage("Login Succeed!");
+                    this.$router.push("/");
+                })
+                result.catch((err) => {
+                    const errorCode = err.response.status;
+                    if (errorCode === 700) {
+                        ElMessage("Wrong Password");
+                    } else if (errorCode === 702) {
+                        ElMessage("Illegal Input");
+                    } else {
+                        ElMessage("Unknown Error, Please check network");
+                    }
+                });
+                this.password_input = "";
+            },
+        },
     };
 </script>
 
