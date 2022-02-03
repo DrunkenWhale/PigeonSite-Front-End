@@ -28,6 +28,11 @@
   </el-card>
 </template>
 <script>
+    import register from '../api.js'
+    import {
+        ElMessage
+    } from 'elementplus'
+
     export default {
         name: "Register",
         data() {
@@ -37,9 +42,30 @@
                 password_input: "",
             };
         },
+        methods: {
+            register: function() {
+                var result = register(this.mailbox_input, this.username_input, this.password_input);
+                result.then((res) => {
+                    window.localStorage.setItem("token", res.data.token);
+                    ElMessage("Register Succeed!");
+                    this.$router.push("/login");
+                })
+                result.catch((err) => {
+                    const errorCode = err.response.status;
+                    if (errorCode === 701) {
+                        ElMessage("User Exist");
+                    } else if (errorCode === 702) {
+                        ElMessage("Illegal Input");
+                    } else {
+                        ElMessage("Unknown Error, Please check network");
+                    }
+                });
+                this.mailbox_input = "";
+            }
+        }
     };
 </script>
->
+
 
 <style>
     #mr-round {
