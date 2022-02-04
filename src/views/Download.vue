@@ -1,6 +1,6 @@
 <template>
     <div>   
-       <FileFrame  fileName="l.logo"/>
+       <FileFrame fileName="l.scala.3"/>
     </div>
     </template>
 

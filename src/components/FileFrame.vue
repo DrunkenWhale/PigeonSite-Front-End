@@ -1,9 +1,9 @@
 <template>
 
-    <div style="background-color: aqua;">
-        {{picPath}}
+    <div class="FileFrame">
+        <img :src="this.picPath" >
     </div>
-    <img :src="this.picPath">
+    
     
 </template>
 
@@ -17,7 +17,13 @@
         },
         computed: {
             picPath: function() {
-                return require('../assets/' + this.fileType + '.png')
+                try {
+                    return require('../assets/' + this.fileType + '.png')
+                } catch {
+                    return require('../assets/UnknownFileType.png');
+                }
+
+
             },
             fileType: function() {
                 var tempArray = this.fileName.split('.')
@@ -34,5 +40,8 @@
 </script>
 
 <style scoped>
-
+    .FileFrame {
+        height: 20%;
+        width: 20%;
+    }
 </style>
