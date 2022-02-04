@@ -1,27 +1,42 @@
 <template>
-    <div>   
-       <FileFrame fileName="l.scala.3"/>
-    </div>
-    </template>
+  
+    <el-scrollbar height="87vh" style="overflow-x: hidden;"><el-card>
+      <el-row :gutter="37">
+        <div v-for="file in file_list" :key="file">
+          <FileFrame :fileName="file" :fileSize="12" />
+        </div>
+      </el-row>  </el-card>
+    </el-scrollbar>
+
+</template>
 
 <script>
-    import FileFrame from '../components/FileFrame.vue'
-
+    import FileFrame from "../components/FileFrame.vue";
 
     export default {
         name: "Download",
         components: {
-            FileFrame
+            FileFrame,
         },
         data() {
             return {
-                file_list: [1, 1, 4, 5, 1, 4]
-            }
+                file_list: [
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "test.scala",
+                    "tessaddasasdt.scala",
+                    "test.scala",
+                    "test.scala"
+                ],
+            };
         },
-        methods: {
-
-        },
-    }
+        methods: {},
+    };
 </script>
 
 <style>

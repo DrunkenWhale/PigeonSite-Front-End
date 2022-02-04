@@ -2,7 +2,11 @@
   <el-container>
     <el-aside>
       <el-scrollbar>
-        <el-menu active-text-color="#ffd04b" background-color="rgb(37, 149, 194)" text-color="#fff">
+        <el-menu
+          active-text-color="#ffd04b"
+          background-color="rgb(37, 149, 194)"
+          text-color="#fff"
+        >
           <el-sub-menu index="1">
             <template #title> Auth </template>
 <el-menu-item index="1-1" @click="login">Login</el-menu-item>
@@ -17,7 +21,7 @@
 </el-scrollbar>
 </el-aside>
 <el-container>
-    <el-header> </el-header>
+
     <el-main>
         <router-view />
     </el-main>
@@ -44,12 +48,10 @@
                 this.$router.push("/upload");
             },
             download: function download() {
-                this.$router.push("/download")
-            }
+                this.$router.push("/download");
+            },
         },
     };
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -27,7 +27,9 @@
 </template>
 
 <script>
-    import login from "../api.js";
+    import {
+        login
+    } from "../api.js";
     import {
         ElMessage
     } from "element-plus";
@@ -42,6 +44,7 @@
         methods: {
             login: function() {
                 var result = login(this.mailbox_input, this.password_input);
+                console.log(result)
                 result.then((res) => {
                     window.localStorage.setItem("token", res.data.token);
                     ElMessage("Login Succeed!");
