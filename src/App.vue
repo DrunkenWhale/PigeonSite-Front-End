@@ -11,7 +11,7 @@
 <el-sub-menu index="2">
     <template #title>NetDisk</template>
     <el-menu-item index="2-1" @click="upload">Upload</el-menu-item>
-    <el-menu-item index="2-2">Download</el-menu-item>
+    <el-menu-item index="2-2" @click="download">Download</el-menu-item>
 </el-sub-menu>
 </el-menu>
 </el-scrollbar>
@@ -42,6 +42,9 @@
             },
             upload: function upload() {
                 this.$router.push("/upload");
+            },
+            download: function download() {
+                this.$router.push("/download")
             }
         },
     };

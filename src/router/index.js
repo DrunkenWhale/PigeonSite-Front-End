@@ -17,7 +17,13 @@ const routes = [{
         name: "Upload",
         component: () =>
             import ("../views/Upload.vue"),
-    },
+    }, {
+        path: "/download",
+
+        name: "Download",
+        component: () =>
+            import ("../views/Download.vue")
+    }
 ];
 
 const router = createRouter({
