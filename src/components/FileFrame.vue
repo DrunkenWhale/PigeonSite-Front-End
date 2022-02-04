@@ -55,8 +55,9 @@
                 return typeName;
             },
             fileSizeFormat: function() {
-                var size = (((this.fileSize * 1.0 / 1024) / 1024) * 1000).toString.
-                return size
+
+                return (((this.fileSize * 1.0 / 1024) / 1024)).toString().substring(0, 5)
+
             }
         },
         props: {
