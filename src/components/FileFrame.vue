@@ -1,8 +1,9 @@
 <template>
 
     <div style="background-color: aqua;">
-        {{picType}}
+        {{picPath}}
     </div>
+    <img :src="this.picPath">
     
 </template>
 
@@ -15,25 +16,23 @@
             }
         },
         computed: {
-
-            picType: function() {
-                return '../assets/' + this.type
+            picPath: function() {
+                return require('../assets/' + this.fileType + '.png')
             },
-
-            type: function() {
-                var tempArray = this.name.split('.')
+            fileType: function() {
+                var tempArray = this.fileName.split('.')
                 var typeName = tempArray[tempArray.length - 1]
                 return typeName
             }
         },
         props: {
-            name: String,
-            Size: Number,
-            createTime: String
+            fileName: String,
+            fileSize: Number,
+            fielCreateTime: String
         }
     }
 </script>
 
-<style>
+<style scoped>
 
 </style>

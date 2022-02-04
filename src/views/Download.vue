@@ -1,6 +1,6 @@
 <template>
     <div>   
-       <FileFrame name="114" />
+       <FileFrame  fileName="l.logo"/>
     </div>
     </template>
 
