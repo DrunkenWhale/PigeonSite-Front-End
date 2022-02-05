@@ -1,15 +1,26 @@
 <template>
 <div>
-    <div v-for="file in file_list" :key="file">{{file}}</div>
+   <el-card style="text-align:center">
+       <el-upload class="upload-frame" :action="uploadURL" :headers="headers"  drag multiply>
+          
+           
+       </el-upload>
+   </el-card>
 </div>
 </template>
 
 <script>
+    import {
+        url
+    } from "../api.js"
     export default {
         name: "Upload",
         data() {
             return {
-                file_list: [1, 1, 4, 5, 1, 4]
+                uploadURL: url + "/file/upload",
+                headers: {
+                    "token": window.localStorage.getItem("token")
+                }
             }
         },
         methods: {
@@ -19,5 +30,8 @@
 </script>
 
 <style>
-
+    .upload-frame {
+        position: relative;
+        align-self: center;
+    }
 </style>

@@ -1,7 +1,9 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = url;
 
 export default {};
+
+export var url = "http://localhost:5000/api"
 
 //   /auth/login
 export function login(mailbox, password) {
@@ -30,6 +32,7 @@ export function getFileList() {
     var tokenString = window.localStorage.getItem("token");
     return axios({
         method: "get",
+        baseURL: url,
         url: "/file/list",
         headers: {
             token: tokenString,

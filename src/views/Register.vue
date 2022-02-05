@@ -23,7 +23,7 @@
       ></el-input>
     </div>
     <div id="mr-round" style="margin-left: 80%;" >
-      <el-button @click="regist" size="large" type="primary" color="rgba(20, 143, 180, 0.589)" plain> Submit </el-button>
+      <el-button @click="regist" size="large" type="primary" color="rgba(20, 143, 180, 0.589)" plain> Register </el-button>
     </div>
   </el-card>
 </template>
