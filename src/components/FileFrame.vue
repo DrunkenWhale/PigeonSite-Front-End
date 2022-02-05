@@ -6,7 +6,7 @@
         <div v-if="flag" class="Shade">
             <div @click="download" style="height: 72.5px;background-color:rgb(13, 163, 233)">Download</div>
             <div style="height: 72.5px;background-color:rgb(0, 255, 136)">
-                {{this.fileSizeFormat}} MB
+                {{this.fileSizeFormat}}
             </div>
         </div>
       </transition>
@@ -55,8 +55,19 @@
                 return typeName;
             },
             fileSizeFormat: function() {
-
-                return (((this.fileSize * 1.0 / 1024) / 1024)).toString().substring(0, 5)
+                var size = this.fileSize
+                if (size < 1024) {
+                    return size.toFixed(3) + "B"
+                }
+                size /= 1024;
+                if (size < 1024) {
+                    return size.toFixed(3) + "KB"
+                }
+                size /= 1024;
+                if (size < 1024) {
+                    return size.toFixed(3) + "MB"
+                }
+                return (size / 1024).toFixed(3) + "GB"
 
             }
         },

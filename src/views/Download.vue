@@ -3,7 +3,7 @@
     <el-scrollbar height="87vh" style="overflow-x: hidden;"><el-card>
       <el-row :gutter="37">
         <div v-for="file in file_list" :key="file">
-          <FileFrame :fileName="file" :fileSize="12" />
+          <FileFrame :fileName="file" :fileSize="12875451" />
         </div>
       </el-row>  </el-card>
     </el-scrollbar>
