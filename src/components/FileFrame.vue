@@ -4,8 +4,10 @@
          <img :src="this.picPath" height="115" width="115" />
         <div class="FileName">{{ this.fileName }}</div>
 
-    <el-dialog v-model="dialogVisable">
-     <div @click="download" style="height: 72.5px;background-color:rgb(13, 163, 233)">Download</div>
+    <el-dialog v-model="dialogVisable" :center="true">
+     <div @click="download" class="DownloadButton">
+        <span style="position:relative;top:32%">Download</span>
+    </div>
             <div style="height: 72.5px;background-color:rgb(0, 255, 136)">
                 size: {{this.fileSizeFormat}} <br>
                 time: {{this.fileCreateTimeFormat}}
@@ -17,6 +19,9 @@
 </template>
 
 <script>
+    import {
+        download
+    } from "../api.js"
     export default {
         name: "FileFrame",
         data() {
@@ -30,7 +35,7 @@
             },
 
             download: function() {
-                return 1;
+                download(this.fileName)
             }
         },
         computed: {
@@ -90,6 +95,7 @@
         border-radius: 10px;
         border-color: rgba(16, 6, 107, 0.473);
         background-color: rgba(112, 16, 221, 0.267);
+        color: white;
     }
     
     .FileName {
@@ -98,5 +104,25 @@
         word-wrap: break-word;
         word-break: break-all;
         overflow: hidden;
+    }
+    
+    .DownloadButton {
+        position: relative;
+        align-items: center;
+        left: 34%;
+        width: 30%;
+        height: 60px;
+        text-align: center;
+        background-color: rgba(13, 214, 171, 0.952);
+        color: white;
+        transition-duration: 0.7s;
+        margin: 10px 10px 10px 10px;
+        border-style: solid;
+        border-radius: 7px;
+    }
+    
+    .DownloadButton:hover {
+        background-color: white;
+        color: rgba(13, 214, 171, 0.952);
     }
 </style>
