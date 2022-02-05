@@ -1,7 +1,7 @@
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-export default {}
+export default {};
 
 //   /auth/login
 export function login(mailbox, password) {
@@ -18,10 +18,27 @@ export function login(mailbox, password) {
 export function register(mailbox, user_name, password) {
     const form = new FormData();
     form.append("mailbox", mailbox);
-    form.append("username", user_name)
-    form.append("password", password)
+    form.append("username", user_name);
+    form.append("password", password);
     return axios.post("/auth/register", form, {
         timeout: 3000,
         responseType: "json",
+    });
+}
+
+export function getFileList() {
+    var tokenString = window.localStorage.getItem("token");
+    return axios({
+        method: "get",
+        url: "/file/list",
+        headers: {
+            token: tokenString,
+
+        },
+        config: {
+
+            timeout: 3000,
+            responseType: "json",
+        }
     });
 }

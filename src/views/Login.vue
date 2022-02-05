@@ -44,7 +44,6 @@
         methods: {
             login: function() {
                 var result = login(this.mailbox_input, this.password_input);
-                console.log(result)
                 result.then((res) => {
                     window.localStorage.setItem("token", res.data.token);
                     ElMessage("Login Succeed!");
@@ -57,7 +56,7 @@
                     } else if (errorCode === 702) {
                         ElMessage("Illegal Input");
                     } else {
-                        ElMessage("Unknown Error, Please check network");
+                        ElMessage("Unknown Error, Please check out network");
                     }
                 });
                 this.password_input = "";

@@ -60,7 +60,7 @@
                     } else if (errorCode === 702) {
                         ElMessage("Illegal Input");
                     } else {
-                        ElMessage("Unknown Error, Please check network");
+                        ElMessage("Unknown Error, Please check out network");
                     }
                 });
                 this.mailbox_input = "";

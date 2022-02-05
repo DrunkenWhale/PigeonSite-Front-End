@@ -1,23 +1,17 @@
 <template>
   <el-col :span="6">
-    <div class="FileFrame" @mouseenter="display" @mouseleave="hidden">
-      
-        <transition name="shadow">
-        <div v-if="flag" class="Shade">
-            <div @click="download" style="height: 72.5px;background-color:rgb(13, 163, 233)">Download</div>
+    <div class="FileFrame" @click="showDialog" @mouseenter="display" @mouseleave="hidden">
+         <img :src="this.picPath" height="115" width="115" />
+        <div class="FileName">{{ this.fileName }}</div>
+
+    <el-dialog v-model="dialogVisable">
+     <div @click="download" style="height: 72.5px;background-color:rgb(13, 163, 233)">Download</div>
             <div style="height: 72.5px;background-color:rgb(0, 255, 136)">
-                {{this.fileSizeFormat}}
+                size: {{this.fileSizeFormat}} <br>
+                time: {{this.fileCreateTimeFormat}}
             </div>
-        </div>
-      </transition>
-
-      <transition name="knife">
-        <img v-if="!flag" :src="this.picPath" height="115" width="115" />
-       </transition>
-       <transition name="shadow">
-        <div v-if="!flag" class="FileName">{{ this.fileName }}</div>
-      </transition>
-
+    </el-dialog>
+      
     </div>
   </el-col>
 </template>
@@ -27,16 +21,14 @@
         name: "FileFrame",
         data() {
             return {
-                flag: false,
+                dialogVisable: false
             };
         },
         methods: {
-            display: function() {
-                this.flag = true;
+            showDialog: function() {
+                this.dialogVisable = true;
             },
-            hidden: function() {
-                this.flag = false;
-            },
+
             download: function() {
                 return 1;
             }
@@ -68,13 +60,16 @@
                     return size.toFixed(3) + "MB"
                 }
                 return (size / 1024).toFixed(3) + "GB"
-
+            },
+            fileCreateTimeFormat: function() {
+                var createTimeDate = (new Date(this.fileCreateTime * 1000))
+                return createTimeDate.getFullYear() + " " + createTimeDate.getMonth() + "" + createTimeDate.getDay() + " " + createTimeDate.getHours()
             }
         },
         props: {
             fileName: String,
             fileSize: Number,
-            fielCreateTime: Number,
+            fileCreateTime: Number,
         },
     };
 </script>
@@ -83,16 +78,19 @@
     .FileFrame {
         width: 115px;
         height: 20%;
-        background-color: rgb(255, 255, 255);
         text-align: center;
-        margin: 10px 10px 10px 0;
-        transition-duration: 1.3s;
+        margin: 5px 5px 5px 0;
+        transition-duration: 1s;
+        border-style: solid;
+        border-color: transparent;
+        border-width: 5px;
     }
-    /*.FileFrame:hover {
-        background-color: black;
-        color: white;
+    
+    .FileFrame:hover {
+        border-radius: 10px;
+        border-color: rgba(16, 6, 107, 0.473);
+        background-color: rgba(112, 16, 221, 0.267);
     }
-    */
     
     .FileName {
         width: 115px;
@@ -100,40 +98,5 @@
         word-wrap: break-word;
         word-break: break-all;
         overflow: hidden;
-    }
-    
-    .Shade {
-        position: absolute;
-        height: 145px;
-        width: 115px;
-        background-color: black;
-    }
-    
-    .shadow-enter-from,
-    .shadow-leave-to {
-        transition: 1s;
-        opacity: 0;
-    }
-    
-    .shadow-leave-active {
-        color: transparent;
-    }
-    
-    .shadow-leave-from,
-    .shadow-enter-to {
-        transition: 1s;
-        opacity: 1;
-    }
-    
-    .knife-enter-from,
-    .knife-leave-to {
-        transition: 1s;
-        opacity: 0;
-    }
-    
-    .knife-leave-from,
-    .knife-enter-to {
-        transition: 1s;
-        opacity: 1;
     }
 </style>
