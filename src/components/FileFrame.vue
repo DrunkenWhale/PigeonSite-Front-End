@@ -1,19 +1,28 @@
 <template>
   <el-col :span="6">
-    <div class="FileFrame" @click="showDialog" @mouseenter="display" @mouseleave="hidden">
-         <img :src="this.picPath" height="115" width="115" />
-        <div class="FileName">{{ this.fileName }}</div>
+    <div
+      class="FileFrame"
+      @click="showDialog"
+      @mouseenter="display"
+      @mouseleave="hidden"
+    >
+      <img :src="this.picPath" height="115" width="115" />
+      <div class="FileName">{{ this.fileName }}</div>
 
-    <el-dialog v-model="dialogVisable" :center="true">
-     <div @click="download" class="DownloadButton">
-        <span style="position:relative;top:32%">Download</span>
-    </div>
-            <div style="height: 72.5px;background-color:rgb(0, 255, 136)">
-                size: {{this.fileSizeFormat}} <br>
-                time: {{this.fileCreateTimeFormat}}
-            </div>
-    </el-dialog>
-      
+      <el-dialog v-model="dialogVisable" :center="true">
+        <div style="height: 72.5px; background-color: rgb(0, 255, 136)">
+          size: {{ this.fileSizeFormat }} <br />
+          time: {{ this.fileCreateTimeFormat }}
+        </div>
+
+        <div @click="downloadFile" class="DownloadButton">
+          <span style="position: relative; top: 32%">Download</span>
+        </div>
+
+        <div @click="deleteFile" class="DeleteButton">
+          <span style="position: relative; top: 32%">Delete</span>
+        </div>
+      </el-dialog>
     </div>
   </el-col>
 </template>
@@ -21,12 +30,12 @@
 <script>
     import {
         download
-    } from "../api.js"
+    } from "../api.js";
     export default {
         name: "FileFrame",
         data() {
             return {
-                dialogVisable: false
+                dialogVisable: false,
             };
         },
         methods: {
@@ -34,9 +43,11 @@
                 this.dialogVisable = true;
             },
 
-            download: function() {
-                download(this.fileName)
-            }
+            downloadFile: function() {
+                download(this.fileName);
+            },
+
+            deleteFile: function() {},
         },
         computed: {
             picPath: function() {
@@ -52,24 +63,32 @@
                 return typeName;
             },
             fileSizeFormat: function() {
-                var size = this.fileSize
+                var size = this.fileSize;
                 if (size < 1024) {
-                    return size.toFixed(3) + "B"
+                    return size.toFixed(3) + "B";
                 }
                 size /= 1024;
                 if (size < 1024) {
-                    return size.toFixed(3) + "KB"
+                    return size.toFixed(3) + "KB";
                 }
                 size /= 1024;
                 if (size < 1024) {
-                    return size.toFixed(3) + "MB"
+                    return size.toFixed(3) + "MB";
                 }
-                return (size / 1024).toFixed(3) + "GB"
+                return (size / 1024).toFixed(3) + "GB";
             },
             fileCreateTimeFormat: function() {
-                var createTimeDate = (new Date(this.fileCreateTime * 1000))
-                return createTimeDate.getFullYear() + " " + createTimeDate.getMonth() + "" + createTimeDate.getDay() + " " + createTimeDate.getHours()
-            }
+                var createTimeDate = new Date(this.fileCreateTime * 1000);
+                return (
+                    createTimeDate.getFullYear() +
+                    " " +
+                    createTimeDate.getMonth() +
+                    "" +
+                    createTimeDate.getDay() +
+                    " " +
+                    createTimeDate.getHours()
+                );
+            },
         },
         props: {
             fileName: String,
@@ -124,5 +143,25 @@
     .DownloadButton:hover {
         background-color: white;
         color: rgba(13, 214, 171, 0.952);
+    }
+    
+    .DeleteButton {
+        position: relative;
+        align-items: center;
+        left: 34%;
+        width: 30%;
+        height: 60px;
+        text-align: center;
+        background-color: rgba(228, 9, 9, 0.952);
+        color: white;
+        transition-duration: 0.7s;
+        margin: 10px 10px 10px 10px;
+        border-style: solid;
+        border-radius: 7px;
+    }
+    
+    .DeleteButton:hover {
+        background-color: white;
+        color: rgba(228, 9, 9, 0.952);
     }
 </style>
