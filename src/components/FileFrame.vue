@@ -10,9 +10,9 @@
       <div class="FileName">{{ this.fileName }}</div>
 
       <el-dialog v-model="dialogVisable" :center="true">
-        <div style="height: 72.5px; background-color: rgb(0, 255, 136)">
-          size: {{ this.fileSizeFormat }} <br />
-          time: {{ this.fileCreateTimeFormat }}
+        <div style="height: 72.5px; background-color: rgba(114, 129, 133, 0.37);color:rgba(167, 28, 202, 0.644);text-align:center">
+          size  : {{ this.fileSizeFormat }} <br><br>
+          time  : {{ this.fileCreateTimeFormat }}
         </div>
 
         <div @click="downloadFile" class="DownloadButton">
@@ -29,7 +29,8 @@
 
 <script>
     import {
-        download
+        download,
+        delete_
     } from "../api.js";
     export default {
         name: "FileFrame",
@@ -47,7 +48,9 @@
                 download(this.fileName);
             },
 
-            deleteFile: function() {},
+            deleteFile: function() {
+                delete_(this.fileName);
+            },
         },
         computed: {
             picPath: function() {
@@ -81,12 +84,13 @@
                 var createTimeDate = new Date(this.fileCreateTime * 1000);
                 return (
                     createTimeDate.getFullYear() +
-                    " " +
+                    " 年 " +
                     createTimeDate.getMonth() +
-                    "" +
+                    " 月 " +
                     createTimeDate.getDay() +
-                    " " +
-                    createTimeDate.getHours()
+                    " 日 " +
+                    createTimeDate.getHours() +
+                    " 时 "
                 );
             },
         },

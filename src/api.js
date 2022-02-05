@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ElMessage } from 'element-plus';
 axios.defaults.baseURL = url;
 
 export default {};
@@ -64,6 +65,27 @@ export function download(filename) {
         link.setAttribute('download', filename);
         document.body.appendChild(link);
         link.click();
+    });
+    return null
+}
+
+
+//   /file/delete
+export function delete_(filename) {
+    var tokenString = window.localStorage.getItem("token")
+    const formData = new FormData();
+    formData.append("file_name", filename);
+    axios({
+        method: "delete",
+        baseURL: url,
+        url: "/file/delete",
+        data: formData,
+        headers: {
+            token: tokenString
+        },
+        responseType: 'json',
+    }).then(() => {
+        ElMessage("Delete File Succeed")
     });
     return null
 }
