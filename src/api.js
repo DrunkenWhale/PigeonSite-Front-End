@@ -11,7 +11,7 @@ export function login(mailbox, password) {
     const form = new FormData();
     form.append("mailbox", mailbox);
     form.append("password", password);
-    return axios.post("/auth/login", form, {
+    return axios.post(url + "/auth/login", form, {
         timeout: 3000,
         responseType: "json",
     });
@@ -23,7 +23,7 @@ export function register(mailbox, user_name, password) {
     form.append("mailbox", mailbox);
     form.append("username", user_name);
     form.append("password", password);
-    return axios.post("/auth/register", form, {
+    return axios.post(url + "/auth/register", form, {
         timeout: 3000,
         responseType: "json",
     });
