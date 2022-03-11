@@ -88,6 +88,32 @@ export function delete_(filename) {
     return null;
 }
 
+// GET  /sex/
+
+export function downloadPicByName(picName) {
+    var tokenString = window.localStorage.getItem("token");
+    return axios({
+            method: "get",
+            baseURL: url,
+            url: "/sex/?pic=" + picName,
+            headers: {
+                token: tokenString,
+            },
+            responseType: "json",
+        })
+        .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", picName);
+            document.body.appendChild(link);
+            link.click();
+        })
+        .catch(() => {
+            ElMessage("下载失败！ 检查网络或重新登陆！");
+        });
+}
+
 // POST /sex/
 
 export function getArtifactPicList() {
@@ -117,9 +143,8 @@ function getArtifactPicListImpl(random) {
 }
 // url path
 export function getSpecialPicURLByName(picName) {
-    return "/sex/?pic" + "picName";
+    return url + "/sex/?pic=" + picName;
 }
-
 
 // PUT /sex/
 
