@@ -19,10 +19,14 @@ const routes = [{
             import ("../views/Upload.vue"),
     }, {
         path: "/download",
-
         name: "Download",
         component: () =>
             import ("../views/Download.vue")
+    }, {
+        path: "/artifact",
+        name: "Artifact",
+        component: () =>
+            import ("../views/Artifact")
     }
 ];
 

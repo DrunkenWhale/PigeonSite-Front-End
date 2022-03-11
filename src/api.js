@@ -1,10 +1,10 @@
 import axios from "axios";
-import { ElMessage } from 'element-plus';
+import { ElMessage } from "element-plus";
 axios.defaults.baseURL = url;
 
 export default {};
 
-export var url = "http://localhost:5000/api"
+export var url = "http://localhost:5000/api";
 
 //   /auth/login
 export function login(mailbox, password) {
@@ -38,41 +38,39 @@ export function getFileList() {
         url: "/file/list",
         headers: {
             token: tokenString,
-
         },
         config: {
             timeout: 3000,
             responseType: "json",
-        }
+        },
     });
 }
 
 //   /file/download
 export function download(filename) {
-    var tokenString = window.localStorage.getItem("token")
+    var tokenString = window.localStorage.getItem("token");
     axios({
         method: "get",
         baseURL: url,
         url: "/file/download?file_name=" + filename,
         headers: {
-            token: tokenString
+            token: tokenString,
         },
-        responseType: 'blob',
+        responseType: "blob",
     }).then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', filename);
+        link.setAttribute("download", filename);
         document.body.appendChild(link);
         link.click();
     });
-    return null
+    return null;
 }
-
 
 //   /file/delete
 export function delete_(filename) {
-    var tokenString = window.localStorage.getItem("token")
+    var tokenString = window.localStorage.getItem("token");
     const formData = new FormData();
     formData.append("file_name", filename);
     axios({
@@ -81,11 +79,60 @@ export function delete_(filename) {
         url: "/file/delete",
         data: formData,
         headers: {
-            token: tokenString
+            token: tokenString,
         },
-        responseType: 'json',
+        responseType: "json",
     }).then(() => {
-        ElMessage("Delete File Succeed")
+        ElMessage("Delete File Succeed");
     });
-    return null
+    return null;
+}
+
+// POST /sex/
+
+export function getArtifactPicList() {
+    return getArtifactPicListImpl(null);
+}
+
+export function getArtifactRandomPic() {
+    return getArtifactPicListImpl(114514);
+}
+
+function getArtifactPicListImpl(random) {
+    var tokenString = window.localStorage.getItem("token");
+    var formData = new FormData();
+    if (random != null) {
+        formData.append("random", true);
+    }
+    return axios({
+        method: "post",
+        baseURL: url,
+        url: "/sex/",
+        data: formData,
+        headers: {
+            token: tokenString,
+        },
+        responseType: "json",
+    });
+}
+// url path
+export function getSpecialPicURLByName(picName) {
+    return "/sex/?pic" + "picName";
+}
+
+
+// PUT /sex/
+
+export function expendArtifactPicRepository() {
+    var tokenString = window.localStorage.getItem("token");
+    axios({
+        method: "put",
+        baseURL: url,
+        url: "/sex/",
+        headers: {
+            token: tokenString,
+        },
+        responseType: "json",
+    });
+    return null;
 }

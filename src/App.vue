@@ -17,6 +17,10 @@
     <el-menu-item index="2-1" @click="upload">Upload</el-menu-item>
     <el-menu-item index="2-2" @click="download">Download</el-menu-item>
 </el-sub-menu>
+<el-sub-menu>
+    <template #title>Artifact</template>
+    <el-menu-item index="3-1" @click="artifact">Pic</el-menu-item>
+</el-sub-menu>
 </el-menu>
 </el-scrollbar>
 </el-aside>
@@ -24,6 +28,7 @@
 
     <el-main>
         <router-view />
+        <!-- main -->
     </el-main>
 </el-container>
 </el-container>
@@ -50,6 +55,9 @@
             download: function download() {
                 this.$router.push("/download");
             },
+            artifact: function artifact() {
+                this.$router.push("/artifact")
+            }
         },
     };
 </script>
