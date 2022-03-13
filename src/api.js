@@ -157,6 +157,7 @@ export function expendArtifactPicRepository() {
         headers: {
             token: tokenString,
         },
+        timeout: "300000",
         responseType: "json",
     });
     return null;
